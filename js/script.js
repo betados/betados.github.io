@@ -44,17 +44,20 @@ class Link {
   }
 }
 
+function draw(last) {
+    if (last.child){
+      new Link(last.child, last).draw();
+      last.draw();
+      draw(last.child);
+    }
+    else{
+      last.draw();
+    }
+}
+
 var first = new Commit('Naces un día', null);
 var c2 = new Commit('Creces y creces', first);
 var c3 = new Commit('Vas al colegio', c2);
 var c4 = new Commit('Aprendes memeces', c3);
 
-var last = first;
-while (last) {
-
-  if (last.child){
-    new Link(last.child, last).draw();
-  };
-  last.draw();
-  last = last.child;
-};
+draw(first);
