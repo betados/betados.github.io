@@ -8,6 +8,13 @@ class Commit {
     this.radius = 5;
     this.message = message;
     this.parent = parent;
+    if (this.parent){
+      this.parent.set_child(this);
+    }
+    this.child = null;
+  }
+  set_child(child){
+    this.child = child;
   }
   draw() {
     ctx.beginPath();
@@ -32,17 +39,17 @@ class Link {
   }
 }
 
-var c1 = new Commit(40, 99, 'First commit', null);
-var c2 = new Commit(40, 79, 'Second commit', c1);
+var first = new Commit(40, 99, 'First commit', null);
+var c2 = new Commit(40, 79, 'Second commit', first);
 var c3 = new Commit(40, 59, 'Third commit', c2);
 var c4 = new Commit(40, 39, 'Fourth commit', c3);
 
-var last = c4;
+var last = first;
 while (last) {
 
-  if (last.parent){
-    new Link(last.parent, last).draw();
+  if (last.child){
+    new Link(last.child, last).draw();
   };
   last.draw();
-  last = last.parent;
+  last = last.child;
 };
