@@ -21,9 +21,14 @@ class Commit {
     this.child = child;
   }
   draw() {
-    svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius} fill='red' />`
-    // stroke='black' stroke-width='4'
-     svg_html += `<text x=${this.x  + this.radius*2} y=${this.y + this.radius} fill="black">${this.message}</text>`
+    svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius}
+    fill='red' />`
+    
+    // FIXME font-family not working
+    svg_html += `<text x=${this.x  + this.radius*2} y=${this.y + this.radius}
+    fill="black" font-family="Calibri" font-size="10">
+    ${this.message}
+    </text>`
   }
 }
 
@@ -33,7 +38,9 @@ class Link {
     this.c2=c2;
   }
   draw(){
-    svg_html += `<line x1=${this.c1.x} y1=${this.c1.y} x2=${this.c2.x} y2=${this.c2.y} style="stroke:rgb(0,0,0);stroke-width:2" />`
+    svg_html += `<line x1=${this.c1.x} y1=${this.c1.y}
+    x2=${this.c2.x} y2=${this.c2.y}
+    style="stroke:rgb(0,0,0);stroke-width:2" />`
   }
 }
 
@@ -55,4 +62,4 @@ var c4 = new Commit('Aprendes memeces', c3);
 
 draw(first);
 
-document.getElementById('svg').innerHTML= svg_html;
+document.getElementById('svg').innerHTML = svg_html;
