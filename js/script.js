@@ -1,5 +1,4 @@
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d");
+var svg_html = "";
 
 class Commit {
   constructor(message, parent){
@@ -22,13 +21,9 @@ class Commit {
     this.child = child;
   }
   draw() {
-    ctx.beginPath();
-    ctx.fillStyle = "red";
-    ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.fillStyle = "black";
-    ctx.font = "10px Arial";
-    ctx.fillText(this.message, this.x + this.radius*2, this.y + this.radius);
+    svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius} fill='red' />`
+    // stroke='black' stroke-width='4'
+     svg_html += `<text x=${this.x  + this.radius*2} y=${this.y + this.radius} fill="black">${this.message}</text>`
   }
 }
 
@@ -38,9 +33,7 @@ class Link {
     this.c2=c2;
   }
   draw(){
-    ctx.moveTo(this.c1.x, this.c1.y);
-    ctx.lineTo(this.c2.x, this.c2.y);
-    ctx.stroke();
+    svg_html += `<line x1=${this.c1.x} y1=${this.c1.y} x2=${this.c2.x} y2=${this.c2.y} style="stroke:rgb(0,0,0);stroke-width:2" />`
   }
 }
 
@@ -61,3 +54,5 @@ var c3 = new Commit('Vas al colegio', c2);
 var c4 = new Commit('Aprendes memeces', c3);
 
 draw(first);
+
+document.getElementById('svg').innerHTML= svg_html;
