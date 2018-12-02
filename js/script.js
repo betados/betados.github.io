@@ -2,12 +2,17 @@ var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
 class Commit {
-  constructor(x, y, message, parent){
-    this.x = x;
-    this.y = y;
+  constructor(message, parent){
+    this.parent = parent;
+    this.x = 40;
+    if (this.parent == null){
+      this.y = 99;
+    }
+    else{
+      this.y = this.parent.y - 20;
+    }
     this.radius = 5;
     this.message = message;
-    this.parent = parent;
     if (this.parent){
       this.parent.set_child(this);
     }
@@ -39,10 +44,10 @@ class Link {
   }
 }
 
-var first = new Commit(40, 99, 'First commit', null);
-var c2 = new Commit(40, 79, 'Second commit', first);
-var c3 = new Commit(40, 59, 'Third commit', c2);
-var c4 = new Commit(40, 39, 'Fourth commit', c3);
+var first = new Commit('First commit', null);
+var c2 = new Commit('Second commit', first);
+var c3 = new Commit('Third commit', c2);
+var c4 = new Commit('Fourth commit', c3);
 
 var last = first;
 while (last) {
