@@ -2,15 +2,21 @@ var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 
 class Commit {
-  constructor(x, y){
+  constructor(x, y, message){
     this.x = x;
     this.y = y;
-    this.radius=5;
+    this.radius = 5;
+    this.message = message;
   }
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    ctx.stroke();
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.fillStyle = "black";
+    ctx.font = "10px Arial";
+    ctx.fillText(this.message, this.x + this.radius*2, this.y + this.radius);
+    // ctx.stroke();
   }
 }
 
@@ -26,8 +32,8 @@ class Link {
   }
 }
 
-var c1 = new Commit(40,99);
-var c2 = new Commit(40,79);
+var c1 = new Commit(40,99, 'First commit');
+var c2 = new Commit(40,79, 'Second commit');
 var l1 = new Link(c1,c2);
 l1.draw();
 c1.draw();
