@@ -44,10 +44,10 @@ class Link {
   }
 }
 
-var first = new Commit('First commit', null);
-var c2 = new Commit('Second commit', first);
-var c3 = new Commit('Third commit', c2);
-var c4 = new Commit('Fourth commit', c3);
+var first = new Commit('Naces un día', null);
+var c2 = new Commit('Creces y creces', first);
+var c3 = new Commit('Vas al colegio', c2);
+var c4 = new Commit('Aprendes memeces', c3);
 
 var last = first;
 while (last) {
