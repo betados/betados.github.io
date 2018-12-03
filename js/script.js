@@ -29,7 +29,7 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle id=commit${this.id} class=commit onmouseover="showTooltip(evt);"  onmouseout="print(evt);"
+        svg_html += `<circle id=commit${this.id} class=commit onmouseover="showTooltip(evt, 'GROMENAUER');"  onmouseout="showTooltip(evt, '');"
         cx= ${this.x} cy= ${this.y} r=${this.radius}
         fill='red'></circle>`
 
@@ -87,8 +87,9 @@ function print(element){
     console.log(element);
 }
 
-function showTooltip(element){
-    svg_html +=
+function showTooltip(element, message){
+    print(message);
+    document.getElementById('info').innerHTML = message;
 }
 //var commits = document.getElementsByClassName("commit");
 //for (var i = 0; i < commits.length; i++) {
