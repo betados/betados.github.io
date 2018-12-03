@@ -1,55 +1,64 @@
 var svg_html = "";
+var commit_count = 0;
 
 class Commit {
-  constructor(message, parent){
-    this.parent = parent;
-    this.x = 40;
-    if (this.parent == null){
-      this.y = 99;
+    constructor(message, parent){
+        this.id = commit_count;
+        commit_count++;
+        this.parent = parent;
+
+        if (this.parent){
+            this.parent.add_child(this);
+        }
+
+        this.radius = 5;
+        this.message = message;
+        this.children = new Array();
     }
-    else{
-      this.y = this.parent.y - 20;
+    set_pos(){
+        if (this.parent){
+            this.x = this.parent.x - 20 * this.parent.children.indexOf(this);
+            this.y = init_depth - 20 * this.id;
+        }else{
+            this.x = 40
+            this.y = init_depth;
+        }
+
     }
-    this.radius = 5;
-    this.message = message;
-    if (this.parent){
-      this.parent.set_child(this);
+    add_child(child){
+        this.children.push(child);
     }
-    this.child = new Array();
-  }
-  set_child(child){
-    this.child.push(child);
-  }
-  draw() {
-    svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius}
-    fill='red' />`
-    
-    // FIXME font-family not working
-    svg_html += `<text x=${this.x  + this.radius*2} y=${this.y + this.radius}
-    fill="black" font-family="Calibri" font-size="10">
-    ${this.message}
-    </text>`
-  }
+    draw() {
+        svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius}
+        fill='red' />`
+
+        // FIXME font-family not working
+        svg_html += `<text x=${this.x  + this.radius*2} y=${this.y + this.radius}
+        fill="black" font-family="Calibri" font-size="10">
+        ${this.message}
+        </text>`
+    }
 }
 
 class Link {
-  constructor(c1, c2){
-    this.c1=c1;
-    this.c2=c2;
-  }
-  draw(){
-    svg_html += `<line x1=${this.c1.x} y1=${this.c1.y}
-    x2=${this.c2.x} y2=${this.c2.y}
-    style="stroke:rgb(0,0,0);stroke-width:2" />`
-  }
+    constructor(c1, c2){
+        this.c1=c1;
+        this.c2=c2;
+    }
+    draw(){
+        svg_html += `<line x1=${this.c1.x} y1=${this.c1.y}
+        x2=${this.c2.x} y2=${this.c2.y}
+        style="stroke:rgb(0,0,0);stroke-width:2" />`
+    }
 }
 
 function draw(last) {
     var i;
-    for (i=0; i<last.child.length; i++){
-        new Link(last.child[i], last).draw();
+    for (i=0; i<last.children.length; i++){
+        last.children[i].set_pos();
+        new Link(last, last.children[i]).draw();
         last.draw();
-        draw(last.child[i]);
+        draw(last.children[i]);
     }
     last.draw();
 }
@@ -64,8 +73,14 @@ var first = new Commit('Naces un día', null);
 var c2 = new Commit('Creces y creces', first);
 var c3 = new Commit('Vas al colegio', c2);
 var c4 = new Commit('Aprendes memeces', c3);
-var c5 = new Commit('bifurcado *************', c2);
+var c5 = new Commit('bifurcado', c2);
+var c6 = new Commit('bifurcado 2', c5);
+var c4 = new Commit('Luego tropiezas', c4);
 
+var init_depth = 20 * commit_count;
+console.log(init_depth)
+
+first.set_pos();
 draw(first);
 
 document.getElementById('svg').innerHTML = svg_html;
