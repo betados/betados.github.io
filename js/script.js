@@ -82,8 +82,8 @@ first.set_pos();
 draw(first);
 
 svg_html += `<text id=text x=999 y=999
-fill="black" font-family="Calibri" font-size="10">
-GROMENAUERSVG
+fill="black" font-family="Calibri" font-size="30">
+GROMENAUER
 </text>`
 
 document.getElementById('svg').innerHTML = svg_html;
