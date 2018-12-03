@@ -33,7 +33,7 @@ class Commit {
         fill='red' />`
 
         // FIXME font-family not working
-        svg_html += `<text x=${this.x  + this.radius*2} y=${this.y + this.radius}
+        svg_html += `<text x=${40  + this.radius*2} y=${this.y + this.radius}
         fill="black" font-family="Calibri" font-size="10">
         ${this.message}
         </text>`
@@ -78,7 +78,6 @@ var c6 = new Commit('bifurcado 2', c5);
 var c4 = new Commit('Luego tropiezas', c4);
 
 var init_depth = 20 * commit_count;
-console.log(init_depth)
 
 first.set_pos();
 draw(first);
