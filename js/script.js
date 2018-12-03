@@ -15,10 +15,10 @@ class Commit {
     if (this.parent){
       this.parent.set_child(this);
     }
-    this.child = null;
+    this.child = new Array();
   }
   set_child(child){
-    this.child = child;
+    this.child.push(child);
   }
   draw() {
     svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius}
@@ -45,26 +45,27 @@ class Link {
 }
 
 function draw(last) {
-    if (last.child){
-      new Link(last.child, last).draw();
-      last.draw();
-      draw(last.child);
+    var i;
+    for (i=0; i<last.child.length; i++){
+        new Link(last.child[i], last).draw();
+        last.draw();
+        draw(last.child[i]);
     }
-    else{
-      last.draw();
-    }
+    last.draw();
 }
-var commits = new Array();
-commits.push(new Commit('Naces un día', null));
-commits.push(new Commit('Creces y creces', commits[commits.length - 1]));
-commits.push(new Commit('Vas al colegio', commits[commits.length - 1]));
-commits.push(new Commit('Aprendes memeces', commits[commits.length - 1]));
+//var commits = new Array();
+//commits.push(new Commit('Naces un día', null));
+//commits.push(new Commit('Creces y creces', commits[commits.length - 1]));
+//commits.push(new Commit('Vas al colegio', commits[commits.length - 1]));
+//commits.push(new Commit('Aprendes memeces', commits[commits.length - 1]));
+//commits.push(new Commit('Bifurcado***************************', commits[1]));
 
-//var first = new Commit('Naces un día', null);
-//var c2 = new Commit('Creces y creces', first);
-//var c3 = new Commit('Vas al colegio', c2);
-//var c4 = new Commit('Aprendes memeces', c3);
+var first = new Commit('Naces un día', null);
+var c2 = new Commit('Creces y creces', first);
+var c3 = new Commit('Vas al colegio', c2);
+var c4 = new Commit('Aprendes memeces', c3);
+var c5 = new Commit('bifurcado *************', c2);
 
-draw(commits[0]);
+draw(first);
 
 document.getElementById('svg').innerHTML = svg_html;
