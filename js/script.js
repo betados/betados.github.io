@@ -29,8 +29,9 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle id=commit${this.id} class=commit cx= ${this.x} cy= ${this.y} r=${this.radius}
-        fill='red' />`
+        svg_html += `<circle id=commit${this.id} class=commit onmouseover="showTooltip(evt);"  onmouseout="print(evt);"
+        cx= ${this.x} cy= ${this.y} r=${this.radius}
+        fill='red'></circle>`
 
         // FIXME font-family not working
         svg_html += `<text x=${40  + this.radius*2} y=${this.y + this.radius}
@@ -82,11 +83,14 @@ draw(first);
 
 document.getElementById('svg').innerHTML = svg_html;
 
-function print(param){
-    console.log(param);
+function print(element){
+    console.log(element);
 }
 
-var commits = document.getElementsByClassName("commit");
-for (var i = 0; i < commits.length; i++) {
-    commits[i].addEventListener("mouseover", print, 'param');
+function showTooltip(element){
+    svg_html +=
 }
+//var commits = document.getElementsByClassName("commit");
+//for (var i = 0; i < commits.length; i++) {
+//    commits[i].addEventListener("mouseover", print);
+//}
