@@ -29,7 +29,7 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle id=commit${this.id} class=commit onmouseover="showTooltip(evt, 'GROMENAUER');"  onmouseout="showTooltip(evt, '');"
+        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id});"  onmouseout="hideTooltip(evt, '');"
         cx= ${this.x} cy= ${this.y} r=${this.radius}
         fill='red'></circle>`
 
@@ -81,6 +81,11 @@ var init_depth = 20 * commit_count;
 first.set_pos();
 draw(first);
 
+svg_html += `<text id=text x=999 y=999
+fill="black" font-family="Calibri" font-size="10">
+GROMENAUERSVG
+</text>`
+
 document.getElementById('svg').innerHTML = svg_html;
 
 function print(element){
@@ -88,8 +93,15 @@ function print(element){
 }
 
 function showTooltip(element, message){
-    print(message);
-    document.getElementById('info').innerHTML = message;
+  // print(element);
+  print(element.target.cx.animVal.value);
+  document.getElementById('text').setAttribute('x', element.target.cx.animVal.value + 10);
+  document.getElementById('text').setAttribute('y', element.target.cy.animVal.value + 10);
+}
+
+function hideTooltip(element, message){
+  document.getElementById('text').setAttribute('x', 999);
+  document.getElementById('text').setAttribute('y', 999);
 }
 //var commits = document.getElementsByClassName("commit");
 //for (var i = 0; i < commits.length; i++) {
