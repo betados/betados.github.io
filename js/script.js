@@ -29,7 +29,7 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle cx= ${this.x} cy= ${this.y} r=${this.radius}
+        svg_html += `<circle id=commit${this.id} class=commit cx= ${this.x} cy= ${this.y} r=${this.radius}
         fill='red' />`
 
         // FIXME font-family not working
@@ -53,11 +53,9 @@ class Link {
 }
 
 function draw(last) {
-    var i;
-    for (i=0; i<last.children.length; i++){
+    for (var i=0; i<last.children.length; i++){
         last.children[i].set_pos();
         new Link(last, last.children[i]).draw();
-        last.draw();
         draw(last.children[i]);
     }
     last.draw();
@@ -83,3 +81,12 @@ first.set_pos();
 draw(first);
 
 document.getElementById('svg').innerHTML = svg_html;
+
+function print(param){
+    console.log(param);
+}
+
+var commits = document.getElementsByClassName("commit");
+for (var i = 0; i < commits.length; i++) {
+    commits[i].addEventListener("mouseover", print, 'param');
+}
