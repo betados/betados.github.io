@@ -53,6 +53,24 @@ class Link {
     }
 }
 
+class ToolTip{
+    constructor(){
+        this.x = 999;
+        this.y = 999;
+    }
+    draw(){
+        svg_html += `<text id=text x=999 y=999
+        fill="black" font-family="Calibri" font-size="30">
+        GROMENAUER
+        </text>`
+    }
+    move(x, y, message){
+        document.getElementById('text').innerHTML = message;
+        document.getElementById('text').setAttribute('x', x);
+        document.getElementById('text').setAttribute('y', y);
+    }
+}
+
 function draw(last) {
     for (var i=0; i<last.children.length; i++){
         last.children[i].set_pos();
@@ -80,11 +98,8 @@ var init_depth = 20 * commit_count;
 
 first.set_pos();
 draw(first);
-
-svg_html += `<text id=text x=999 y=999
-fill="black" font-family="Calibri" font-size="30">
-GROMENAUER
-</text>`
+var toolTip = new ToolTip();
+toolTip.draw();
 
 document.getElementById('svg').innerHTML = svg_html;
 
@@ -94,16 +109,9 @@ function print(element){
 
 function showTooltip(event, object, message){
     print(message);
-    document.getElementById('text').innerHTML = message;
-    document.getElementById('text').setAttribute('x', object.cx.animVal.value + 10);
-    document.getElementById('text').setAttribute('y', object.cy.animVal.value + 10);
+    toolTip.move(object.cx.animVal.value + 10, object.cy.animVal.value + 10, message)
 }
 
 function hideTooltip(){
-  document.getElementById('text').setAttribute('x', 999);
-  document.getElementById('text').setAttribute('y', 999);
+    toolTip.move(999, 999, 'Gromenauer')
 }
-//var commits = document.getElementsByClassName("commit");
-//for (var i = 0; i < commits.length; i++) {
-//    commits[i].addEventListener("mouseover", print);
-//}
