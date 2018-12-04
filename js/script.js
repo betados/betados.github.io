@@ -67,11 +67,13 @@ class ToolTip{
         </text>`
     }
     move(x, y, message){
+        print(document.getElementById('text'))
         document.getElementById('text').innerHTML = message;
         document.getElementById('text').setAttribute('x', x + 30);
         document.getElementById('text').setAttribute('y', y + 10);
         document.getElementById('rect').setAttribute('x', x + 10);
         document.getElementById('rect').setAttribute('y', y - 25);
+        document.getElementById('rect').setAttribute('width', (message.length+4) * 13);
     }
 }
 
