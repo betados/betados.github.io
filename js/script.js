@@ -59,15 +59,19 @@ class ToolTip{
         this.y = 999;
     }
     draw(){
-        svg_html += `<text id=text x=999 y=999
+        svg_html += `<rect id=rect x="999" y="999" rx="10" ry="10" width="200" height="50"
+        style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+        <text id=text x=999 y=999
         fill="black" font-family="Calibri" font-size="30">
         GROMENAUER
         </text>`
     }
     move(x, y, message){
         document.getElementById('text').innerHTML = message;
-        document.getElementById('text').setAttribute('x', x);
-        document.getElementById('text').setAttribute('y', y);
+        document.getElementById('text').setAttribute('x', x + 30);
+        document.getElementById('text').setAttribute('y', y + 10);
+        document.getElementById('rect').setAttribute('x', x + 10);
+        document.getElementById('rect').setAttribute('y', y - 25);
     }
 }
 
@@ -94,7 +98,7 @@ var c5 = new Commit('bifurcado', c2);
 var c6 = new Commit('bifurcado 2', c5);
 var c4 = new Commit('Luego tropiezas', c4);
 
-var init_depth = 20 * commit_count;
+var init_depth = 20 * commit_count + 50;
 
 first.set_pos();
 draw(first);
@@ -109,7 +113,7 @@ function print(element){
 
 function showTooltip(event, object, message){
     print(message);
-    toolTip.move(object.cx.animVal.value + 10, object.cy.animVal.value + 10, message)
+    toolTip.move(object.cx.animVal.value, object.cy.animVal.value, message)
 }
 
 function hideTooltip(){
