@@ -29,7 +29,7 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id});"  onmouseout="hideTooltip(evt, '');"
+        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id}, '${this.message}');"  onmouseout="hideTooltip();"
         cx= ${this.x} cy= ${this.y} r=${this.radius}
         fill='red'></circle>`
 
@@ -92,14 +92,14 @@ function print(element){
     console.log(element);
 }
 
-function showTooltip(element, message){
-  // print(element);
-  print(element.target.cx.animVal.value);
-  document.getElementById('text').setAttribute('x', element.target.cx.animVal.value + 10);
-  document.getElementById('text').setAttribute('y', element.target.cy.animVal.value + 10);
+function showTooltip(event, object, message){
+    print(message);
+    document.getElementById('text').innerHTML = message;
+    document.getElementById('text').setAttribute('x', object.cx.animVal.value + 10);
+    document.getElementById('text').setAttribute('y', object.cy.animVal.value + 10);
 }
 
-function hideTooltip(element, message){
+function hideTooltip(){
   document.getElementById('text').setAttribute('x', 999);
   document.getElementById('text').setAttribute('y', 999);
 }
