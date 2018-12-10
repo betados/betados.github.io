@@ -1,0 +1,30 @@
+{
+  "c1": {
+    "message": "Naces un día",
+    "parent": null
+  },
+  "c2": {
+    "message": "Creces y creces",
+    "parent": "c1"
+  },
+  "c3": {
+    "message": "'Vas al colegio",
+    "parent": "c2"
+  },
+  "c4": {
+    "message": "Aprendes memeces",
+    "parent": "c3"
+  },
+  "c5": {
+    "message": "bifurcado",
+    "parent": "c2"
+  },
+  "c6": {
+    "message": "bifurcado 2",
+    "parent": "c5"
+  },
+  "c7": {
+    "message": "Luego tropiezas ",
+    "parent": "c4"
+  }
+}
