@@ -1,30 +1,30 @@
 {
-  "c1": {
+  "1": {
     "message": "Naces un día",
     "parent": null
   },
-  "c2": {
+  "2": {
     "message": "Creces y creces",
-    "parent": "c1"
+    "parent": 1
   },
-  "c3": {
+  "3": {
     "message": "'Vas al colegio",
-    "parent": "c2"
+    "parent": 2
   },
-  "c4": {
+  "4": {
     "message": "Aprendes memeces",
-    "parent": "c3"
+    "parent": 3
   },
-  "c5": {
+  "5": {
     "message": "bifurcado",
-    "parent": "c2"
+    "parent": 2
   },
-  "c6": {
+  "6": {
     "message": "bifurcado 2",
-    "parent": "c5"
+    "parent": 5
   },
-  "c7": {
+  "7": {
     "message": "Luego tropiezas ",
-    "parent": "c4"
+    "parent": 4
   }
 }

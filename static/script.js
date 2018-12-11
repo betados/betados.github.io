@@ -85,22 +85,35 @@ function draw(last) {
     }
     last.draw();
 }
-//var commits = new Array();
-//commits.push(new Commit('Naces un día', null));
-//commits.push(new Commit('Creces y creces', commits[commits.length - 1]));
-//commits.push(new Commit('Vas al colegio', commits[commits.length - 1]));
-//commits.push(new Commit('Aprendes memeces', commits[commits.length - 1]));
-//commits.push(new Commit('Bifurcado***************************', commits[1]));
 
-var first = new Commit('Naces un día', null);
-var c2 = new Commit('Creces y creces', first);
-var c3 = new Commit('Vas al colegio', c2);
-var c4 = new Commit('Aprendes memeces', c3);
-var c5 = new Commit('bifurcado', c2);
-var c6 = new Commit('bifurcado 2', c5);
-var c4 = new Commit('Luego tropiezas', c4);
+var commits = new Array();
+function read_json(){
+    jQuery.support.cors = true;
+    return $.getJSON("static/commits.json", function(json) {
+       jQuery.each(eval(json), function(name, data){
+//            alert( name + ": " + data['message'] +','+data['parent']);
+            if (data['parent'] == null){
+//                alert(true);
+                commits.push(new Commit(data['message'], null));
+                }
+            else{
+//                alert(false);
+                commits.push(new Commit(data['message'], commits[data['parent']-1]));
+            }
+        });
+
+    });
+}
+read_json();
+console.log(commits)
+
+
+while (commits.length == 0){
+    alert(commits.length);}
 
 var init_depth = 20 * commit_count + 50;
+var first = commits[0];
+//alert(commits[0]);
 
 first.set_pos();
 draw(first);
