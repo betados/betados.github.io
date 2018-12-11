@@ -99,7 +99,7 @@ function read_json(){
                 }
             else{
                 // alert(false);
-                commits.push(new Commit(data['message'], commits[data['parent']-1]));
+                commits.push(new Commit(data['message'], commits[data['parent']]));
             }
         });
 
