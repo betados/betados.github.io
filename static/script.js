@@ -1,5 +1,7 @@
 var svg_html = "";
 var commit_count = 0;
+var commits = new Array();
+var init_depth = 0
 
 class Commit {
     constructor(message, parent){
@@ -67,7 +69,7 @@ class ToolTip{
         </text>`
     }
     move(x, y, message){
-        print(document.getElementById('text'))
+//        print(document.getElementById('text'))
         document.getElementById('text').innerHTML = message;
         document.getElementById('text').setAttribute('x', x + 30);
         document.getElementById('text').setAttribute('y', y + 10);
@@ -86,48 +88,46 @@ function draw(last) {
     last.draw();
 }
 
-var commits = new Array();
 function read_json(){
     jQuery.support.cors = true;
     return $.getJSON("static/commits.json", function(json) {
        jQuery.each(eval(json), function(name, data){
-//            alert( name + ": " + data['message'] +','+data['parent']);
+            //  alert( name + ": " + data['message'] +','+data['parent']);
             if (data['parent'] == null){
-//                alert(true);
+                // alert(true);
                 commits.push(new Commit(data['message'], null));
                 }
             else{
-//                alert(false);
+                // alert(false);
                 commits.push(new Commit(data['message'], commits[data['parent']-1]));
             }
         });
 
     });
 }
+
 read_json();
-console.log(commits)
-
-
-while (commits.length == 0){
-    alert(commits.length);}
-
-var init_depth = 20 * commit_count + 50;
-var first = commits[0];
-//alert(commits[0]);
-
-first.set_pos();
-draw(first);
 var toolTip = new ToolTip();
 toolTip.draw();
 
-document.getElementById('svg').innerHTML = svg_html;
+window.onload = function(){
+    console.log(commits)
 
-function print(element){
-    console.log(element);
+    // Waiting for the read_json() to finish
+    //alert('Reading');
+
+    init_depth = 20 * commit_count + 50;
+    var first = commits[0];
+
+    first.set_pos();
+    draw(first);
+
+
+    document.getElementById('svg').innerHTML = svg_html;
 }
 
 function showTooltip(event, object, message){
-    print(message);
+    console.log(message);
     toolTip.move(object.cx.animVal.value, object.cy.animVal.value, message)
 }
 
