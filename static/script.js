@@ -5,6 +5,8 @@ var init_depth = 0
 
 class Commit {
     constructor(message, parent){
+        // FIXME esta no creo que sea la forma de definir un atributo estático
+        Commit.X = 120;
         this.id = commit_count;
         commit_count++;
         this.parent = parent;
@@ -22,7 +24,7 @@ class Commit {
             this.x = this.parent.x - 20 * this.parent.children.indexOf(this);
             this.y = init_depth - 20 * this.id;
         }else{
-            this.x = 40
+            this.x = Commit.X
             this.y = init_depth;
         }
 
@@ -31,12 +33,12 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id}, '${this.message}');"  onmouseout="hideTooltip();"
+        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id}, '${this.message}', '${this.id}');"  onmouseout="hideTooltip();"
         cx= ${this.x} cy= ${this.y} r=${this.radius}
         fill='red'></circle>`
 
         // FIXME font-family not working
-        svg_html += `<text x=${40  + this.radius*2} y=${this.y + this.radius}
+        svg_html += `<text x=${Commit.X  + this.radius*2} y=${this.y + this.radius}
         fill="black" font-family="Calibri" font-size="10">
         ${this.message}
         </text>`
@@ -47,11 +49,28 @@ class Link {
     constructor(c1, c2){
         this.c1=c1;
         this.c2=c2;
+        if (c1.x != c2.x){
+            this.elbow_x = c2.x;
+            this.elbow_y = (c1.y + c2.y) * 0.5;
+        }
+        else{
+            this.elbow_x = null
+        }
     }
     draw(){
-        svg_html += `<line x1=${this.c1.x} y1=${this.c1.y}
-        x2=${this.c2.x} y2=${this.c2.y}
-        style="stroke:rgb(0,0,0);stroke-width:2" />`
+        if (this.elbow_x == null){
+            svg_html += `<line x1=${this.c1.x} y1=${this.c1.y}
+            x2=${this.c2.x} y2=${this.c2.y}
+            style="stroke:rgb(0,0,0);stroke-width:2" />`
+            }
+        else{
+            svg_html += `<line x1=${this.c1.x} y1=${this.c1.y}
+            x2=${this.elbow_x} y2=${this.elbow_y}
+            style="stroke:rgb(0,0,0);stroke-width:2" />`
+            svg_html += `<line x1=${this.elbow_x} y1=${this.elbow_y}
+            x2=${this.c2.x} y2=${this.c2.y}
+            style="stroke:rgb(0,0,0);stroke-width:2" />`
+        }
     }
 }
 
@@ -68,8 +87,7 @@ class ToolTip{
         GROMENAUER
         </text>`
     }
-    move(x, y, message){
-//        print(document.getElementById('text'))
+    move(x, y, message, id){
         document.getElementById('text').innerHTML = message;
         document.getElementById('text').setAttribute('x', x + 30);
         document.getElementById('text').setAttribute('y', y + 10);
@@ -110,9 +128,9 @@ function read_json(){
 }
 
 function render(){
-    console.log(commits.length);
-    console.log(commits);
-    console.log(commits.length);
+//    console.log(commits.length);
+//    console.log(commits);
+//    console.log(commits.length);
     init_depth = 20 * commit_count + 50;
     var first = commits[0];
     first.set_pos();
@@ -120,8 +138,8 @@ function render(){
     document.getElementById('svg').innerHTML = svg_html;
     }
 
-function showTooltip(event, object, message){
-    console.log(message);
+function showTooltip(event, object, message, id){
+    console.log(id, message);
     toolTip.move(object.cx.animVal.value, object.cy.animVal.value, message)
 }
 
