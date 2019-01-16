@@ -4,7 +4,7 @@ var commits = new Array();
 var init_depth = 0
 
 class Commit {
-    constructor(message, parent, branch){
+    constructor(message, parent, branch, description){
         // FIXME esta no creo que sea la forma de definir un atributo estático
         Commit.X = 120;
         this.id = commit_count;
@@ -17,6 +17,7 @@ class Commit {
 
         this.radius = 5;
         this.message = message;
+        this.description = description;
         this.branch = branch;
         this.children = new Array();
     }
@@ -34,7 +35,7 @@ class Commit {
         this.children.push(child);
     }
     draw() {
-        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id}, '${this.message}', '${this.id}');"  onmouseout="hideTooltip();"
+        svg_html += `<circle id=commit${this.id} class=commit onmouseenter="showTooltip(evt, commit${this.id}, '${this.description}', '${this.id}');"  onmouseout="hideTooltip();"
         cx= ${this.x} cy= ${this.y} r=${this.radius}
         fill='red'></circle>`
 
@@ -48,7 +49,7 @@ class Commit {
                 svg_html += `<rect id=branch_rect x=${separator + cumulated_bg_width} y=${this.y-7} rx="1" ry="1" width=${bg_width} height=${font_size*1.1}
                 style="fill:green;stroke:black;stroke-width:1;opacity:1" />
                 <text x=${separator + cumulated_bg_width + font_size*0.2} y=${this.y + this.radius}
-                fill="white" font-family="Calibri" font-size=font_size>
+                fill="white" font-family="Arial" font-size=font_size>
                 ${this.branch[i]}
                 </text>`
                 separator += font_size;
@@ -58,7 +59,7 @@ class Commit {
 
         // FIXME font-family not working
         svg_html += `<text x=${separator + cumulated_bg_width} y=${this.y + this.radius}
-        fill="black" font-family="Calibri" font-size="10">
+        fill="black" font-family="Arial" font-size="10">
         ${this.message}
         </text>`
     }
@@ -103,7 +104,7 @@ class ToolTip{
         svg_html += `<rect id=tooltip_rect x="999" y="999" rx="10" ry="10" width="200" height="50"
         style="fill:red;stroke:black;stroke-width:5;opacity:0.9" />
         <text id=tooltip_text x=999 y=999
-        fill="black" font-family="Calibri" font-size=${this.font_size}>
+        fill="black" font-family="Arial" font-size=${this.font_size}>
         GROMENAUER
         </text>`
     }
@@ -136,11 +137,11 @@ function read_json(){
             //  alert( name + ": " + data['message'] +','+data['parent']);
             if (data['parent'] == null){
                 // alert(true);
-                commits.push(new Commit(data['message'], null, data['branch']));
+                commits.push(new Commit(data['message'], null, data['branch'], data['description']));
                 }
             else{
                 // alert(false);
-                commits.push(new Commit(data['message'], commits[data['parent']], data['branch']));
+                commits.push(new Commit(data['message'], commits[data['parent']], data['branch'], data['description']));
             }
         });
         render()
