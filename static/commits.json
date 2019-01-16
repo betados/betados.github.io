@@ -1,68 +1,68 @@
 {
   "0": {
     "message": "Nacimiento",
-    "description": "Nacimiento",
     "parent": null,
     "branch": [
       "master"
-    ]
+    ],
+    "description": "12 de abril de 1988"
   },
   "1": {
     "message": "Comienzo escolar",
-    "description": "Comienzo escolar",
     "parent": 0,
-    "branch": null
+    "branch": null,
+    "description": "Comienzo escolar"
   },
   "2": {
     "message": "Universidad",
-    "description": "Universidad",
     "parent": 1,
-    "branch": null
+    "branch": null,
+    "description": "Ingenieria Tecnica;Industrial en la;Universidad Politecnica;de madrid"
   },
   "3": {
-    "message": "Bicirad",
-    "description": "Bicirad",
+    "message": "bicirad",
     "parent": 2,
-    "branch": null
+    "branch": null,
+    "description": "Comercio online;dedicado a la venta de;recambios y;accesorios para bicicleta"
   },
   "4": {
     "message": "Ausgang Export",
-    "description": "Ausgang Export",
     "parent": 3,
-    "branch": null
+    "branch": null,
+    "description": "Ausgang Export"
   },
   "5": {
     "message": "TechOnRails",
-    "description": "TechOnRails",
     "parent": 4,
-    "branch": null
+    "branch": null,
+    "description": "Desarrollo de;software en Python y Java;para el dpto. de I+D;de Siemens Rail"
   },
   "6": {
-    "message": "Curso avanzado de Python",
-    "description": "Curso avanzado de Python",
+    "message": "Curso de Python avanzado",
     "parent": 2,
-    "branch": null
+    "branch": null,
+    "description": "Curso de Python;avanzado"
   },
   "7": {
     "message": "Entelgy",
-    "description": "Entelgy",
     "parent": 5,
-    "branch": null
+    "branch": null,
+    "description": "Desarrollo de;software en Python para el;dpto. de OSS de;Telefonica Bussines;Solutions"
   },
   "8": {
-    "message": "Curso avanzado de Git",
-    "description": "Curso avanzado de Git",
+    "message": "Curso de de GIT avanzado",
     "parent": 6,
     "branch": [
       "Educacion"
-    ]
+    ],
+    "description": "Curso de de GIT;avanzado"
   },
   "9": {
     "message": "VisualCounter",
-    "description": "VisualCounter",
     "parent": 7,
     "branch": [
       "Profesional"
-    ]
+    ],
+    "description": "VisualCounter"
   }
 }
