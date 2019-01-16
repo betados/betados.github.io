@@ -1,1 +1,68 @@
-{"0": {"message": "Nacimiento", "parent": null, "branch": ["master"]}, "1": {"message": "Comienzo escolar", "parent": 0, "branch": null}, "2": {"message": "Universidad", "parent": 1, "branch": null}, "3": {"message": "Bicirad", "parent": 2, "branch": null}, "4": {"message": "Ausgang Export", "parent": 3, "branch": null}, "5": {"message": "TechOnRails", "parent": 4, "branch": null}, "6": {"message": "Curso avanzado de Python", "parent": 2, "branch": null}, "7": {"message": "Entelgy", "parent": 5, "branch": null}, "8": {"message": "Curso avanzado de Git", "parent": 6, "branch": ["Educacion"]}, "9": {"message": "VisualCounter", "parent": 7, "branch": ["Profesional"]}}
+{
+  "0": {
+    "message": "Nacimiento",
+    "description": "Nacimiento",
+    "parent": null,
+    "branch": [
+      "master"
+    ]
+  },
+  "1": {
+    "message": "Comienzo escolar",
+    "description": "Comienzo escolar",
+    "parent": 0,
+    "branch": null
+  },
+  "2": {
+    "message": "Universidad",
+    "description": "Universidad",
+    "parent": 1,
+    "branch": null
+  },
+  "3": {
+    "message": "Bicirad",
+    "description": "Bicirad",
+    "parent": 2,
+    "branch": null
+  },
+  "4": {
+    "message": "Ausgang Export",
+    "description": "Ausgang Export",
+    "parent": 3,
+    "branch": null
+  },
+  "5": {
+    "message": "TechOnRails",
+    "description": "TechOnRails",
+    "parent": 4,
+    "branch": null
+  },
+  "6": {
+    "message": "Curso avanzado de Python",
+    "description": "Curso avanzado de Python",
+    "parent": 2,
+    "branch": null
+  },
+  "7": {
+    "message": "Entelgy",
+    "description": "Entelgy",
+    "parent": 5,
+    "branch": null
+  },
+  "8": {
+    "message": "Curso avanzado de Git",
+    "description": "Curso avanzado de Git",
+    "parent": 6,
+    "branch": [
+      "Educacion"
+    ]
+  },
+  "9": {
+    "message": "VisualCounter",
+    "description": "VisualCounter",
+    "parent": 7,
+    "branch": [
+      "Profesional"
+    ]
+  }
+}
