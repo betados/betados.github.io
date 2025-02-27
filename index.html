@@ -1,18 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
-    <title>VisualIne </title>
+  <meta charset="utf-8">
+  <title>VisualIne</title>
+  <style>
+    /* Dark default theme */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: #121212;
+      color: #ffffff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    /* Light theme */
+    .light-theme {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      background-color: inherit;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-  <body>
-      <div align="center">VisualIne</div>
-      <div align="center">
-          <svg id="svg" width="500" height="999"></svg>
-      </div>
-      <div id="info"></div>
-      <script type="text/javascript" src="static/script.js"></script>
-  </body>
+<body>
+  <h1>VisualIne</h1>
+  <button id="themeToggle">Toggle Theme</button>
+  <canvas id="barChart" width="800" height="500"></canvas>
+  <script src="static/script.js"></script>
+</body>
 </html>
