@@ -9,14 +9,14 @@
       font-family: Arial, sans-serif;
       text-align: center;
       margin: 20px;
-      background-color: #121212;
-      color: #ffffff;
-      transition: background-color 0.3s, color 0.3s;
+      background-color: #031c2a;
+      color: #dfffff;
+      transition: background-color 1s, color 1s;
     }
     /* Light theme */
     .light-theme {
-      background-color: #ffffff;
-      color: #000000;
+      background-color: #dfffff;
+      color: #031c2a;
     }
     canvas {
       border: 1px solid #ccc;
@@ -35,9 +35,10 @@
   <h1>VisualIne</h1>
   <button id="themeToggle">Toggle Theme</button>
   <canvas id="barChart" width="800" height="500"></canvas>
-  
+
   <!-- Include jQuery before your custom script -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="static/script.js"></script>
+<!--  <script src="static/script.js"></script>-->
+  <script src="static/script.js?v=1234"></script> <!--#avoid cache-->
 </body>
 </html>
