@@ -46,18 +46,11 @@ function drawChart() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Get the current background color
-  const bgColor = getComputedStyle(document.body).backgroundColor;
-
-  // Function to determine contrast color (light or dark)
-  function getContrastColor(bgColor) {
-    // Convert RGB to an array
-    const rgb = bgColor.match(/\d+/g).map(Number);
-    // Compute brightness (perceived luminance)
-    const brightness = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
-    return brightness > 128 ? "#dfffff": "#031c20"; // Dark for light bg, light for dark bg
-  }
-
-  const textColor = getContrastColor(bgColor);
+  const isLightTheme = document.body.classList.contains("light-theme");
+  console.log(isLightTheme)
+  const textColor = isLightTheme ? "#031c2a" : "#dfffff";
+  console.log(textColor)
+  console.log("\n")
   ctx.fillStyle = textColor;
   ctx.strokeStyle = textColor;
 
@@ -65,7 +58,7 @@ function drawChart() {
   const marginLeft = 50;
   const marginRight = 20;
   const marginBottom = 40;
-  const topMargin = 40; // Increased top margin for title
+  const topMargin = 60; // Increased top margin for title
   const chartWidth = canvas.width - marginLeft - marginRight;
   const chartHeight = canvas.height - topMargin - marginBottom;
 
@@ -75,7 +68,7 @@ function drawChart() {
   // Draw chart title
   ctx.font = "20px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("Expenditure Analysis Over Time", canvas.width / 2, 30);
+  ctx.fillText("Evolución del gasto por persona. (ajustado a la inflación en base a 2006)", canvas.width / 2, 30);
 
   // Calculate group spacing and bar width
   const groupSpacing = chartWidth / n;
