@@ -37,18 +37,28 @@ function parseCSV(text) {
   }
 }
 
+// Draw the grouped bar chart on the canvas
 function drawChart() {
   const canvas = document.getElementById("barChart");
   const ctx = canvas.getContext("2d");
 
+  // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  // Get the current background color
   const isLightTheme = document.body.classList.contains("light-theme");
+  console.log(isLightTheme)
   const textColor = isLightTheme ? "#031c2a" : "#dfffff";
+  console.log(textColor)
+  console.log("\n")
   ctx.fillStyle = textColor;
   ctx.strokeStyle = textColor;
 
-  const marginLeft = 50, marginRight = 20,marginBottom = 40, topMargin = 60;
+  // Define chart margins and dimensions
+  const marginLeft = 50;
+  const marginRight = 20;
+  const marginBottom = 40;
+  const topMargin = 60; // Increased top margin for title
   const chartWidth = canvas.width - marginLeft - marginRight;
   const chartHeight = canvas.height - topMargin - marginBottom;
 
